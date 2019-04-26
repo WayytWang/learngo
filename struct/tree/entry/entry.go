@@ -1,8 +1,8 @@
-package main 
+package main
 
 import (
-	"learngo/struct/tree"
 	"fmt"
+	"learngo/struct/tree"
 )
 
 //扩充Node结构体
@@ -24,13 +24,12 @@ func (myNode *myTreeNode) postOrder() {
 
 }
 
-
 func main() {
 	var root tree.Node
 
-	root = tree.Node{Value:3} //只需要设定结构体中多个字段的一个字段默认值，需要key:value
-	root.Left = &tree.Node{} 
-	root.Right = &tree.Node{Value:5,Left:nil,Right:nil}
+	root = tree.Node{Value: 3} //只需要设定结构体中多个字段的一个字段默认值，需要key:value
+	root.Left = &tree.Node{}
+	root.Right = &tree.Node{Value: 5, Left: nil, Right: nil}
 	//不论地址还是结构本身，一律使用.来访问成员
 	root.Right.Left = new(tree.Node) //开创地址的另一种方法
 	root.Left.Right = tree.CreateTreeNode(2)
@@ -41,7 +40,7 @@ func main() {
 	root.TraverseFunc(func(node *tree.Node) {
 		nodeCount++
 	})
-	fmt.Println("Node Count : ",nodeCount)
+	fmt.Println("Node Count : ", nodeCount)
 	fmt.Println()
 
 	c := root.TraverseWithChannel()
@@ -51,8 +50,7 @@ func main() {
 			maxNode = node.Value
 		}
 	}
-	fmt.Println("Max node value:",maxNode)
-
+	fmt.Println("Max node value:", maxNode)
 
 	//myroot := myTreeNode{&root}
 	// myroot.postOrder()

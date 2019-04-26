@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"time"
 	"math/rand"
+	"time"
 )
 
 func generator() chan int {
@@ -19,7 +19,7 @@ func generator() chan int {
 	return out
 }
 
-func worker(id int,c chan int) {
+func worker(id int, c chan int) {
 	for n := range c {
 		fmt.Printf("Worker %d received %d \n", id, n)
 	}
@@ -27,14 +27,14 @@ func worker(id int,c chan int) {
 
 func createWorker(id int) chan int {
 	c := make(chan int)
-	go worker(id,c)
+	go worker(id, c)
 	return c
 }
 
 func main() {
-	var c1,c2 = generator(),generator()
+	var c1, c2 = generator(), generator()
 	worker := createWorker(0)
-	
+
 	n := 0
 	hasValue := false
 	for {
@@ -42,11 +42,11 @@ func main() {
 		if hasValue {
 			activeWorker = worker
 		}
-		
+
 		select {
-		case n = <- c1:
+		case n = <-c1:
 			hasValue = true
-		case n = <- c2:
+		case n = <-c2:
 			hasValue = true
 		//当channel为nil时，不会被select到
 		case activeWorker <- n:

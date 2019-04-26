@@ -3,6 +3,7 @@ package tree
 import (
 	"fmt"
 )
+
 //用函数式编程来实现遍历
 
 //原来的遍历函数
@@ -16,9 +17,8 @@ import (
 // 	node.Right.Traverse()
 // }
 
-
 func (node *Node) Traverse() {
-	node.TraverseFunc(func(node *Node){
+	node.TraverseFunc(func(node *Node) {
 		node.Print()
 	})
 	fmt.Println()
@@ -39,7 +39,7 @@ func (node *Node) TraverseFunc(f func(*Node)) {
 func (node *Node) TraverseWithChannel() chan *Node {
 	out := make(chan *Node)
 	go func() {
-		node.TraverseFunc(func(node *Node){
+		node.TraverseFunc(func(node *Node) {
 			//将所有的node都放入out中
 			out <- node
 		})
